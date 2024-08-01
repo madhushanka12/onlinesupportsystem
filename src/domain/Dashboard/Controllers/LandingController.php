@@ -2,8 +2,6 @@
 
 namespace Domain\Dashboard\Controllers;
 
-use Domain\Banner\Actions\ListBannersAction;
-use Domain\Film\Actions\ListFilmsAction;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
 
@@ -14,29 +12,7 @@ class LandingController extends Controller
     public function index(
     ): View
     {
-        return view(self::INDEX_ROUTE)->with([
-            'banner' => (new ListBannersAction())->execute(isFront: true,)->first(),
-            'released' => (new ListFilmsAction())->execute(isFront: true, type: 'released'),
-            'upcoming' => (new ListFilmsAction())->execute(isFront: true, type: 'upcoming'),
-            'inReviewMovie' => (new ListFilmsAction())->execute(isFront: true, canDisplayInHome: true)->first(),
-        ]);
+        return view(self::INDEX_ROUTE);
     }
 
-    public function vision(
-    ): View
-    {
-        return view('front.vision');
-    }
-
-    public function privacy(
-    ): View
-    {
-        return view('front.privacy');
-    }
-    
-    public function terms(
-    ): View
-    {
-        return view('front.terms');
-    }
 }

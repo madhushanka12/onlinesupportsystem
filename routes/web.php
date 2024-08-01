@@ -2,7 +2,6 @@
 
 
 use Domain\Dashboard\Controllers\LandingController;
-use Domain\Film\Controllers\FilmController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -31,9 +30,6 @@ Route::name('front.')
         Route::controller(LandingController::class)
             ->group(function () {
                 Route::get('/', 'index')->name('index');
-                Route::get('/vision', 'vision')->name('vision');
-                Route::get('/privacy-policy', 'privacy')->name('privacy');
-                Route::get('/terms-and-conditions', 'terms')->name('terms');
             });
 
     });
