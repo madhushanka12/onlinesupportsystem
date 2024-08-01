@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.myproject.rule=Host(`myproject.localtest.me`)"
+    networks:
+      - traefik-network
+    volumes:
+      - .:/var/www/html
+
+networks:
+  traefik-network:
+    external: true
