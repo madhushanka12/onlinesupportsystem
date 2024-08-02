@@ -19,10 +19,14 @@ class ListTicketsAction
 
         $search = $params['search'] ?? null;
         $page = $params['page'] ?? null;
+        $reference = $params['reference'] ?? null;
 
         return Ticket::query()
             ->when($search, function (Builder $query) use ($search) {
                 return $query->where('name', 'LIKE', "%$search%");
+            })
+            ->when($reference, function (Builder $query) use ($reference) {
+                return $query->where('reference_number', $reference);
             })
             ->latest()
             ->paginate($params['limit'] ?? 20, ['*'], 'page', $page)

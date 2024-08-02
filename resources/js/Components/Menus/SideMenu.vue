@@ -47,7 +47,7 @@
 <script setup>
 import {Inertia} from "@inertiajs/inertia";
 import {usePage} from "@inertiajs/inertia-vue3";
-import {ChartBarIcon, FilmIcon, FlagIcon, GlobeAltIcon, HomeIcon, LogoutIcon, UsersIcon,} from "@heroicons/vue/solid";
+import {ChartBarIcon, FilmIcon, FlagIcon, GlobeAltIcon, HomeIcon, LogoutIcon, UsersIcon, ClipboardIcon} from "@heroicons/vue/solid";
 
 import {onMounted, onUnmounted, ref, watch} from "vue";
 import SideBarItem from "@/Components/SideBarItem.vue";
@@ -75,6 +75,7 @@ const iconMap = {
   UsersIcon: UsersIcon,
   GlobeAltIcon: GlobeAltIcon,
   FilmIcon: FilmIcon,
+  ClipboardIcon: ClipboardIcon,
 };
 
 function processMenu(menu) {

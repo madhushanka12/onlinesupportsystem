@@ -1,11 +1,6 @@
 <?php
 
 use Domain\Auth\Controllers\LoginController;
-use Domain\Banner\Controllers\Admin\BannerController;
-use Domain\Cast\Controllers\Admin\CastController;
-use Domain\Crew\Controllers\Admin\CrewController;
-use Domain\Film\Controllers\Admin\FilmController;
-use Domain\Genre\Controllers\Admin\GenreController;
 use Domain\Ticket\Controllers\Admin\TicketController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
@@ -66,17 +61,11 @@ Route::middleware([
             ->controller(TicketController::class)
             ->group(function () {
                 Route::get('/', 'index')->name('index');
-                Route::get('/create', 'create')->name('create');
-                Route::get('/fetch', 'fetch')->name('fetch');
-                Route::get('/duplicate', 'duplicate')->name('duplicate');
-                Route::post('/store', 'store')->name('store');
 
                 Route::prefix('{ticket}')
                     ->group(function () {
                         Route::get('/show', 'show')->name('show');
                         Route::post('/update', 'update')->name('update');
-                        Route::put('/status', 'status')->name('status');
-                        Route::delete('/destroy', 'destroy')->name('destroy');
                     });
             });
 

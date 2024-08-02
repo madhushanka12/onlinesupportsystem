@@ -5,62 +5,23 @@
                 <div class="grid grid-cols-6 gap-6">
                     <div class="col-span-6">
                         <Label>Name</Label>
-                        <Input
-                            id="name"
-                            v-model="form.name"
-                            autocomplete="name"
-                            class="mt-1 block w-full"
-                            name="name"
-                            type="text"
-                        />
-                        <InputError :message="form.errors.name" class="mt-2" />
+                        <div class="read-only-field">{{ form.name }}</div>
                     </div>
                     <div class="col-span-6">
                         <Label>E-Mail</Label>
-                        <Input
-                            id="email"
-                            v-model="form.email"
-                            autocomplete="email"
-                            class="mt-1 block w-full"
-                            name="email"
-                            type="text"
-                        />
-                        <InputError :message="form.errors.email" class="mt-2" />
+                        <div class="read-only-field">{{ form.email }}</div>
                     </div>
                     <div class="col-span-6">
                         <Label>Mobile</Label>
-                        <Input
-                            id="mobile"
-                            v-model="form.mobile"
-                            autocomplete="mobile"
-                            class="mt-1 block w-full"
-                            name="mobile"
-                            type="text"
-                        />
-                        <InputError :message="form.errors.mobile" class="mt-2" />
+                        <div class="read-only-field">{{ form.mobile }}</div>
                     </div>
                     <div class="col-span-6">
                         <Label>Reference Number</Label>
-                        <Input
-                            id="referenceNumber"
-                            v-model="form.referenceNumber"
-                            autocomplete="referenceNumber"
-                            class="mt-1 block w-full"
-                            name="referenceNumber"
-                            type="text"
-                        />
-                        <InputError :message="form.errors.referenceNumber" class="mt-2" />
+                        <div class="read-only-field">{{ form.referenceNumber }}</div>
                     </div>
                     <div class="col-span-6">
                         <Label>Problem</Label>
-                        <Input
-                            id="problem"
-                            v-model="form.problem"
-                            autocomplete="problem"
-                            class="mt-1 block w-full"
-                            name="problem"
-                            type="text"
-                        />
+                        <div class="read-only-field">{{ form.problem }}</div>
                         <InputError :message="form.errors.problem" class="mt-2" />
                     </div>
                     <div class="col-span-6">
@@ -112,5 +73,15 @@ watch(
 
 const emit = defineEmits(["update:modelValue", "save"]);
 </script>
-
+<style scoped>
+.read-only-field {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #6b7280;
+    background-color: #f9fafb;
+}
+</style>
 <style src="@vueform/multiselect/themes/default.css"></style>

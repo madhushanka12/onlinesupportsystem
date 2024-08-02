@@ -3,6 +3,7 @@
 namespace Domain\Ticket\Controllers;
 
 use App\Http\Controllers\Controller;
+use Domain\Ticket\Actions\ListTicketsAction;
 use Domain\Ticket\Actions\StoreTicketAction;
 use Domain\Ticket\Mails\TicketMail;
 use Domain\Ticket\Requests\TicketRequest;
@@ -27,7 +28,21 @@ class TicketController extends Controller
             'status' => true,
             'type' => 'success',
             'title' => 'Successfully store',
+            'reference' => $ticket -> reference_number,
             'message' => __('Ticket Successfully Placed'),
+        ]);
+    }
+
+    public function fetch(
+        ListTicketsAction $listTicketsAction,
+    ): JsonResponse
+    {
+        $params = [
+            'reference' => request()->has('reference') ? request()->get('reference') : null,
+        ];
+
+        return response()->json([
+            'tickets' => $listTicketsAction->execute($params),
         ]);
     }
 }

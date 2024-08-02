@@ -1,13 +1,16 @@
 <template>
-    <BaseTableTr>
+    <BaseTableTr :class="{'highlight-pending': ticket.status === 'pending'}">
         <BaseTableTd> {{ ticket.name }}</BaseTableTd>
         <BaseTableTd> {{ ticket.referenceNumber }}</BaseTableTd>
-        <BaseTableTd> {{ ticket.problem }}</BaseTableTd>
         <BaseTableTd> {{ ticket.email }}</BaseTableTd>
         <BaseTableTd> {{ ticket.mobile }}</BaseTableTd>
         <BaseTableTd> {{ ticket.status }}</BaseTableTd>
         <BaseTableTd>
-            <ActionDropDown :actions="actions" class="px-4" />
+            <span
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize text-green-800 bg-green-100 cursor-pointer"
+                @click="viewDetails()"
+            >View & Reply
+            </span>
         </BaseTableTd>
     </BaseTableTr>
 </template>
@@ -16,9 +19,7 @@
 import { defineEmits } from "vue";
 import BaseTableTr from "@/Components/BaseTable/BaseTableTr";
 import BaseTableTd from "@/Components/BaseTable/BaseTableTd";
-import ActionDropDown from "@/Components/ActionDropDown";
 import { Inertia } from "@inertiajs/inertia";
-import { PencilIcon, TrashIcon } from "@heroicons/vue/solid";
 
 let props = defineProps({
     ticket: {
@@ -29,17 +30,17 @@ let props = defineProps({
 
 const emit = defineEmits(["select-row"]);
 
-const actions = [
-    {
-        active: true,
-        name: "Edit",
-        callback: () => {
-            Inertia.visit(route("categories.show", { id: props.ticket.id }));
-        },
-        icon: PencilIcon,
-    },
-];
+
+
+
+function viewDetails() {
+    Inertia.visit(route("tickets.show", { id: props.ticket.id }));
+}
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.highlight-pending {
+    background-color: #ffe4e1; 
+}
+</style>

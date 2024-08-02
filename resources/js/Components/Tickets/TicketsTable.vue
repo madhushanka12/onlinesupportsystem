@@ -10,11 +10,10 @@
             <BaseTableTr>
                 <BaseTableTh>Name</BaseTableTh>
                 <BaseTableTh>Reference Number</BaseTableTh>
-                <BaseTableTh>Problem</BaseTableTh>
                 <BaseTableTh> email</BaseTableTh>
                 <BaseTableTh> mobile</BaseTableTh>
                 <BaseTableTh> status</BaseTableTh>
-                <BaseTableTh> Action</BaseTableTh>
+                <BaseTableTh> Problem & Reply</BaseTableTh>
             </BaseTableTr>
         </BaseTableThead>
 

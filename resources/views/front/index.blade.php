@@ -6,15 +6,15 @@
             <form id="status-form" class="mb-3">
                 <div class="mb-3">
                     <label for="reference-number" class="form-label">Reference Number:</label>
-                    <input type="text" id="reference-number" name="referenceNumber" class="form-control" required>
+                    <input type="text" id="reference" name="referenceNumber" class="form-control" required>
                 </div>
-                <button type="button" id="check-status-button" class="btn btn-primary">Check Status</button>
+                <button type="button" id="check-status-button" onclick="getTicket()" class="btn btn-primary">Check Status</button>
             </form>
         </section>
 
         <section id="ticket-details" style="display: none;">
-            <h2>Ticket Details</h2>
-            <p>No details to display yet.</p>
+
+            <div id="ticketDetails"></div>
         </section>
     </main>
 
@@ -56,6 +56,7 @@
 @endsection
 @section('scripts')
     <script>
+
         function ticketSubmit() {
             let route = '{{ route('front.tickets.store') }}';
             let data;
@@ -82,6 +83,14 @@
                 .then(function(response) {
                     clearForm();
 
+                    let ticketReference = response.data.reference;
+
+                    $('#submitTicketModal').modal('show');
+                    $('#submitTicketModal .modal-body').html(`
+            <p>Your ticket has been submitted successfully.</p>
+            <p><strong>Reference Number:</strong> ${ticketReference}</p>
+        `);
+
                 })
                 .catch(function(error) {
                     $('.validation').text('');
@@ -97,6 +106,59 @@
 
         function clearForm() {
             $('#ticketForm .validation').text('')
+        }
+
+        function getTicket() {
+
+            $('#ticketDetails div').remove()
+            let reference = document.getElementById('reference').value.trim();
+
+            if (reference.length === 0) {
+                alert('Reference number must contain at least one character.');
+                return;
+            }
+
+            axios.get(`{{ route('front.tickets.fetch') }}`,
+                {
+                    params:
+                        {
+                            reference: reference,
+                        }
+                }
+            ).then(function(response) {
+                const tickets = response.data.tickets.data;
+
+                let ticketContainer = document.getElementById('ticketDetails');
+                ticketContainer.innerHTML = '';
+
+                if (tickets.length === 0) {
+                    ticketContainer.innerHTML = `
+                <h2>Ticket Details</h2>
+                <p style="color: red;">Incorrect reference number. No ticket found.</p>
+            `;
+                } else {
+                    tickets.forEach(ticket => {
+                        if (ticket.status === 'pending') {
+                            ticketContainer.innerHTML += `
+                        <h2>Ticket Details</h2>
+                        <p>Status: <span style="background-color: yellow; color: black;">${ticket.status}</span></p>
+                    `;
+                        } else {
+                            ticketContainer.innerHTML += `
+                        <h2>Ticket Details</h2>
+                        <p><strong>Problem:</strong> ${ticket.problem}</p>
+                        <p><strong>Support Agent Reply:</strong> ${ticket.reply}</p>
+                        <p><strong>Status:</strong> ${ticket.status}</p>
+                    `;
+                        }
+                    });
+                }
+
+                document.getElementById('ticket-details').style.display = 'block';
+            })
+                .catch(function (error) {
+                    console.error('Error fetching Tickets:', error);
+                });
         }
     </script>
 @endsection

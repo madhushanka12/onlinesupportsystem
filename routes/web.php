@@ -35,5 +35,6 @@ Route::name('front.')
             ->controller(TicketController::class)
             ->group(function () {
                 Route::post('/store', 'store')->name('store');
+                Route::get('/fetch', 'fetch')->name('fetch');
             });
     });

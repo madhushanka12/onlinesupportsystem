@@ -130,7 +130,7 @@ if (! function_exists('menus')) {
                 'name' => 'Tickets',
                 'route' => 'tickets.index',
                 'params' => [],
-                'icon' => 'ChartBarIcon',
+                'icon' => 'ClipboardIcon',
                 'component' => 'Tickets/Index',
                 'access' => checkIfRouteRestricted('tickets'),
                 'children' => null,
