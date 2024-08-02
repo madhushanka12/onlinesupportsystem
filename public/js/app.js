@@ -24772,7 +24772,11 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "footer h-10 flex items-center px-6 border-t border-gray-200 mt-auto"
 };
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex md:justify-between justify-center w-full gap-4\"><div><p class=\"text-sm font-medium\">© PVCU</p></div><div class=\"md:flex hidden gap-2 item-center md:justify-end\"><p class=\"text-sm font-medium\">Developed &amp; Designed by <a href=\"https://www.prodigit.in/\" class=\"text-primary\" target=\"_blank\">Prodigit</a></p></div></div>", 1);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "flex md:justify-between justify-center w-full gap-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "text-sm font-medium"
+}, "© Online Support System")])], -1 /* HOISTED */);
 var _hoisted_3 = [_hoisted_2];
 function render(_ctx, _cache) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("footer", _hoisted_1, [].concat(_hoisted_3));
