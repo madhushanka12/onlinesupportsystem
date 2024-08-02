@@ -2,11 +2,9 @@
 
 
 use Domain\Dashboard\Controllers\LandingController;
-use Illuminate\Foundation\Application;
+use Domain\Ticket\Controllers\TicketController;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 
 Route::get('storage-link', static function () {
@@ -32,4 +30,10 @@ Route::name('front.')
                 Route::get('/', 'index')->name('index');
             });
 
+        Route::prefix('tickets')
+            ->name('tickets.')
+            ->controller(TicketController::class)
+            ->group(function () {
+                Route::post('/store', 'store')->name('store');
+            });
     });

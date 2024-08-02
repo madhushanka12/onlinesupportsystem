@@ -6,6 +6,7 @@ use Domain\Cast\Controllers\Admin\CastController;
 use Domain\Crew\Controllers\Admin\CrewController;
 use Domain\Film\Controllers\Admin\FilmController;
 use Domain\Genre\Controllers\Admin\GenreController;
+use Domain\Ticket\Controllers\Admin\TicketController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -60,9 +61,9 @@ Route::middleware([
                     });
             });
 
-        Route::prefix('casts')
-            ->name('casts.')
-            ->controller(CastController::class)
+        Route::prefix('tickets')
+            ->name('tickets.')
+            ->controller(TicketController::class)
             ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
@@ -70,7 +71,7 @@ Route::middleware([
                 Route::get('/duplicate', 'duplicate')->name('duplicate');
                 Route::post('/store', 'store')->name('store');
 
-                Route::prefix('{cast}')
+                Route::prefix('{ticket}')
                     ->group(function () {
                         Route::get('/show', 'show')->name('show');
                         Route::post('/update', 'update')->name('update');

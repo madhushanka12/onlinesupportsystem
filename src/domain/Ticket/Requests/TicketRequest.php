@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class TicketRequest extends FormRequest
 {
-    use Validation;
+//    use Validation;
 
     public function authorize(): bool
     {

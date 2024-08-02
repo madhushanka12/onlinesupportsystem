@@ -26,29 +26,77 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="ticket-form">
+                    <form id="ticketForm">
                         <div class="mb-3">
                             <label for="customer-name" class="form-label">Customer Name:</label>
-                            <input type="text" id="customer-name" name="customerName" class="form-control" required>
+                            <input type="text" id="name" name="customerName" class="form-control" required>
+                            <span class="validation error-name text-danger"></span>
                         </div>
                         <div class="mb-3">
                             <label for="problem-description" class="form-label">Problem Description:</label>
-                            <textarea id="problem-description" name="problemDescription" class="form-control" required></textarea>
+                            <textarea id="problem" name="problemDescription" class="form-control" required></textarea>
+                            <span class="validation error-problem text-danger"></span>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email:</label>
                             <input type="email" id="email" name="email" class="form-control" required>
+                            <span class="validation error-email text-danger"></span>
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone Number:</label>
-                            <input type="tel" id="phone" name="phone" class="form-control" required>
+                            <input type="tel" id="mobile" name="phone" class="form-control" required>
+                            <span class="validation error-mobile text-danger"></span>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit Ticket</button>
+                        <button type="button" class="btn btn-primary" onclick="ticketSubmit()">Submit Ticket</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+@section('scripts')
+    <script>
+        function ticketSubmit() {
+            let route = '{{ route('front.tickets.store') }}';
+            let data;
+            let name = $('#ticketForm #name').val();
+            let email = $('#ticketForm #email').val();
+            let mobile = $('#ticketForm #mobile').val();
+            let problem = $('#ticketForm #problem').val();
 
+            data = {
+                name: name,
+                email: email,
+                mobile: mobile,
+                problem: problem,
+            }
 
+            axios({
+                method: 'POST',
+                url: route,
+                data: data,
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+            })
+                .then(function(response) {
+                    clearForm();
+
+                })
+                .catch(function(error) {
+                    $('.validation').text('');
+
+                    if (error.response && error.response.status === 422) {
+                        let errors = error.response.data.errors;
+                        $.each(errors, function (field, error) {
+                            $(`.error-${field}`).text(error[0]);
+                        });
+                    }
+                });
+        }
+
+        function clearForm() {
+            $('#ticketForm .validation').text('')
+        }
+    </script>
+@endsection

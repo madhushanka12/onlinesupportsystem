@@ -59,6 +59,7 @@ if (! function_exists('domainWisePermissions')) {
             'dashboard' => permissions(['all', 'fetch', 'create', 'duplicate', 'store', 'show', 'status', 'move', 'update', 'destroy']),
             'tests' => permissions(['all', 'fetch', 'duplicate', 'move']),
             'roles' => permissions(['all', 'fetch', 'duplicate', 'move']),
+            'tickets' => permissions(['all', 'fetch', 'duplicate', 'move']),
         ];
     }
 }
@@ -68,7 +69,6 @@ if (! function_exists('domainWisePermissionsForAPI')) {
     {
         return [
             'dashboard' => permissions(['all', 'fetch', 'create', 'duplicate', 'store', 'show', 'status', 'move', 'update', 'destroy']),
-            'tests' => permissions(['all', 'fetch', 'duplicate', 'move']),
         ];
     }
 }
@@ -107,6 +107,7 @@ if (! function_exists('domains')) {
     {
         return [
             'dashboard',
+            'tickets',
         ];
     }
 }
@@ -126,12 +127,12 @@ if (! function_exists('menus')) {
                 'hasChildren' => false,
             ],
             [
-                'name' => 'Casts',
-                'route' => 'casts.index',
+                'name' => 'Tickets',
+                'route' => 'tickets.index',
                 'params' => [],
                 'icon' => 'ChartBarIcon',
-                'component' => 'Casts/Index',
-                'access' => checkIfRouteRestricted('casts'),
+                'component' => 'Tickets/Index',
+                'access' => checkIfRouteRestricted('tickets'),
                 'children' => null,
                 'hasChildren' => false,
             ],
